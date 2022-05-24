@@ -1,7 +1,6 @@
 ﻿using EnterpriseBillsManagement.Data;
 using EnterpriseBillsManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using MVCStore.ViewModels;
 
 namespace EnterpriseBillsManagement.Controllers
 {
@@ -16,7 +15,7 @@ namespace EnterpriseBillsManagement.Controllers
         }
         public ViewResult Index(int productPage = 1)
         {
-            ViewBag.Title = "MVCStore";
+            ViewBag.Title = "Enterprise Bills Management";
 
             var bills = repository.Bills.OrderBy(x => x.Id).Skip((productPage - 1) * PageSize).Take(PageSize);
 

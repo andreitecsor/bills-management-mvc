@@ -1,4 +1,4 @@
-﻿namespace MVCStore.ViewModels
+﻿namespace EnterpriseBillsManagement.ViewModels
 {
     public class PagingInfoViewModel
     {

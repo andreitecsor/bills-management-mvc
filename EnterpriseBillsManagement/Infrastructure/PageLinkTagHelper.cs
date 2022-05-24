@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using MVCStore.ViewModels;
+using EnterpriseBillsManagement.ViewModels;
 
-namespace MVCStore.Infrastructure
+namespace EnterpriseBillsManagement.Infrastructure
 {
     [HtmlTargetElement("div",Attributes="page-model")]
     public class PageLinkTagHelper:TagHelper
