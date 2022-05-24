@@ -1,5 +1,7 @@
 ﻿using EnterpriseBillsManagement.Data;
+using EnterpriseBillsManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using MVCStore.ViewModels;
 
 namespace EnterpriseBillsManagement.Controllers
 {
@@ -12,14 +14,26 @@ namespace EnterpriseBillsManagement.Controllers
         {
             this.repository = repository;
         }
-        public IActionResult Index(int billPage = 1)
+        public ViewResult Index(int productPage = 1)
         {
-            var bills = repository.Bills
-            .OrderBy(p => p.Id)
-            .Skip((billPage - 1) * PageSize)
-            .Take(PageSize);
+            ViewBag.Title = "MVCStore";
 
-            return View(bills);
+            var bills = repository.Bills.OrderBy(x => x.Id).Skip((productPage - 1) * PageSize).Take(PageSize);
+
+            var paggingInfo = new PagingInfoViewModel
+            {
+                CurrentPage = productPage,
+                ItemsPerPage = PageSize,
+                TotalItems = repository.Bills.Count()
+            };
+
+            BillsListViewModel viewModel = new BillsListViewModel()
+            {
+                Bills = bills,
+                PagingInfo = paggingInfo
+            };
+
+            return View(viewModel);
         }
     }
 }

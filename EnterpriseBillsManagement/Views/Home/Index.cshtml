@@ -1,8 +1,12 @@
-﻿@model IQueryable<Bill>
+﻿@model BillsListViewModel
 
-@foreach (var p in Model ?? Enumerable.Empty<Bill>()) {
+@foreach (var p in Model.Bills)
+{
     <div>
         <h3>@p.Provider</h3>
+        @p.Type
         <h4>@p.Price.ToString("c")</h4>
     </div>
 }
+
+<div page-model="@Model?.PagingInfo" page-action="Index"></div>

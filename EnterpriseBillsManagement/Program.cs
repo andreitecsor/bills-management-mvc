@@ -9,7 +9,8 @@ namespace EnterpriseBillsManagement
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ApplicationDbContext>(opts => {
+            builder.Services.AddDbContext<ApplicationDbContext>(opts =>
+            {
                 opts.UseSqlServer(
                 builder.Configuration["ConnectionStrings:DefaultConnection"]);
             });
@@ -19,6 +20,7 @@ namespace EnterpriseBillsManagement
 
             var app = builder.Build();
             app.UseStaticFiles();
+            app.MapControllerRoute("pagination", "Bills/Page{productPage}", new { Controller = "Home", action = "Index" });
             app.MapDefaultControllerRoute();
             SeedData.EnsurePopulated(app);
             app.Run();
