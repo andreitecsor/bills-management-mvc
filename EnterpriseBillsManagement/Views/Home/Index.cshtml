@@ -1,1 +1,8 @@
-﻿<h4>Welcome to Enterprise Bills Management Software</h4>
+﻿@model IQueryable<Bill>
+
+@foreach (var p in Model ?? Enumerable.Empty<Bill>()) {
+    <div>
+        <h3>@p.Provider</h3>
+        <h4>@p.Price.ToString("c")</h4>
+    </div>
+}

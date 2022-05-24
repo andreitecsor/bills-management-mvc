@@ -49,7 +49,7 @@ namespace EnterpriseBillsManagement.Data
                     Provider = "Enel",
                     Type = BillType.Electricity,
                     Price = 530,
-                    dueDate = new DateTime(2022, 06, 29),
+                    DueDate = new DateTime(2022, 06, 29),
                     Client = smallCompany,
                 },
                 new Bill
@@ -57,7 +57,7 @@ namespace EnterpriseBillsManagement.Data
                     Provider = "ApaNova",
                     Type = BillType.Water,
                     Price = 45.32m,
-                    dueDate = new DateTime(2022, 06, 28),
+                    DueDate = new DateTime(2022, 06, 28),
                     Client = smallCompany,
                 },
                 new Bill
@@ -65,7 +65,7 @@ namespace EnterpriseBillsManagement.Data
                     Provider = "Digi",
                     Type = BillType.Electricity,
                     Price = 4555.32m,
-                    dueDate = new DateTime(2022, 06, 27),
+                    DueDate = new DateTime(2022, 06, 27),
                     Client = bigCompany,
                 },
                 new Bill
@@ -73,7 +73,7 @@ namespace EnterpriseBillsManagement.Data
                     Provider = "Engie",
                     Type = BillType.Gas,
                     Price = 7035.22m,
-                    dueDate = new DateTime(2022, 06, 01),
+                    DueDate = new DateTime(2022, 06, 01),
                     Client = bigCompany,
                 }
                 );
