@@ -1,3 +1,6 @@
+using EnterpriseBillsManagement.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace EnterpriseBillsManagement
 {
     public class Program
@@ -6,6 +9,11 @@ namespace EnterpriseBillsManagement
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDbContext>(opts =>
+            {
+                opts.UseSqlServer(
+                builder.Configuration["ConnectionStrings:DefaultConnection"]);
+            });
             var app = builder.Build();
             app.UseStaticFiles();
             app.MapDefaultControllerRoute();
