@@ -5,33 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EnterpriseBillsManagement.Migrations
 {
-    public partial class Identity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "dueDate",
-                table: "Bills",
-                newName: "DueDate");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Provider",
-                table: "Bills",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "Bills",
-                type: "decimal(12,4)",
-                nullable: false,
-                oldClrType: typeof(decimal),
-                oldType: "decimal(18,2)");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -69,6 +46,22 @@ namespace EnterpriseBillsManagement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    noEmployeesOnSite = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,8 +110,8 @@ namespace EnterpriseBillsManagement.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -162,8 +155,8 @@ namespace EnterpriseBillsManagement.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -175,6 +168,28 @@ namespace EnterpriseBillsManagement.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(12,4)", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bills_Companies_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Companies",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -215,6 +230,11 @@ namespace EnterpriseBillsManagement.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bills_ClientId",
+                table: "Bills",
+                column: "ClientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -235,31 +255,16 @@ namespace EnterpriseBillsManagement.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bills");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
-            migrationBuilder.RenameColumn(
-                name: "DueDate",
-                table: "Bills",
-                newName: "dueDate");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Provider",
-                table: "Bills",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
-            migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "Bills",
-                type: "decimal(18,2)",
-                nullable: false,
-                oldClrType: typeof(decimal),
-                oldType: "decimal(12,4)");
+            migrationBuilder.DropTable(
+                name: "Companies");
         }
     }
 }
