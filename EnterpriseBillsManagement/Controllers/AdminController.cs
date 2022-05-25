@@ -1,10 +1,12 @@
 ﻿using EnterpriseBillsManagement.Data;
 using EnterpriseBillsManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseBillsManagement.Controllers
 {
-    public class AdminController : Controller
+	[Authorize]
+	public class AdminController : Controller
     {
 		private IBillRepository repository;
 		public AdminController(IBillRepository repository)
@@ -20,11 +22,6 @@ namespace EnterpriseBillsManagement.Controllers
 		{
 			var bill = repository.Bills.FirstOrDefault(p => p.Id == id);
 			return View(bill);
-		}
-
-		public IActionResult Create()
-		{
-			return View("Edit", new Bill());
 		}
 
 		[HttpPost]
@@ -43,7 +40,14 @@ namespace EnterpriseBillsManagement.Controllers
 			}
 		}
 
+		public IActionResult Create()
+		{
+			return View("Edit", new Bill());
+		}
+
+	
 		[HttpPost]
+		[Authorize(Roles = "BillsManagement")]
 		public async Task<IActionResult> Delete(int productId)
 		{
 			Bill deletedBill = await repository.DeleteBillAsync(productId);

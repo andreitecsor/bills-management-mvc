@@ -13,15 +13,15 @@ namespace EnterpriseBillsManagement.Controllers
         {
             this.repository = repository;
         }
-        public ViewResult Index(int productPage = 1)
+        public ViewResult Index(int billPage = 1)
         {
             ViewBag.Title = "Enterprise Bills Management";
 
-            var bills = repository.Bills.OrderBy(x => x.Id).Skip((productPage - 1) * PageSize).Take(PageSize);
+            var bills = repository.Bills.OrderBy(x => x.Id).Skip((billPage - 1) * PageSize).Take(PageSize);
 
             var paggingInfo = new PagingInfoViewModel
             {
-                CurrentPage = productPage,
+                CurrentPage = billPage,
                 ItemsPerPage = PageSize,
                 TotalItems = repository.Bills.Count()
             };

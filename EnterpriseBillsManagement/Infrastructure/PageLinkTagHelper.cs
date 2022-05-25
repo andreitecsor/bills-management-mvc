@@ -32,7 +32,7 @@ namespace EnterpriseBillsManagement.Infrastructure
                 for (int i = 1; i <= pageModel.TotalPage; i++)
                 {
                     TagBuilder aTag=new TagBuilder("a");
-                    aTag.Attributes["href"] = urlHelper.Action(PageAction, new { productPage = i });
+                    aTag.Attributes["href"] = urlHelper.Action(PageAction, new { billPage = i });
                     aTag.InnerHtml.Append(i.ToString());
                     result.InnerHtml.AppendHtml(aTag);
                 }
