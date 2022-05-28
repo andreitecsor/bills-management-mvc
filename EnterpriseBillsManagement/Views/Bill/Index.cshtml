@@ -1,49 +1,53 @@
 ﻿@model IEnumerable<Bill>
 
 @{
-    ViewBag.Title = "Bills";
-    Layout = "~/Views/Shared/_SignedInLayout.cshtml";
+	ViewBag.Title = "Bills";
+	Layout = "~/Views/Shared/_SignedInLayout.cshtml";
 }
 
 <h1>Bills</h1>
-
-<a asp-action="Create" class="btn btn-primary mb-3">Add Bill</a>
+@if (User.IsInRole("BillsManagement") || User.IsInRole("BillsWorker"))
+{
+	<a asp-action="Create" class="btn btn-primary mb-3">Add Bill</a>
+}
 <a asp-action="ReturnToCompanies" class="btn btn-info mb-3">Return To Companies</a>
 
 <table class="table table-striped table-bordered table-sm">
-    <tr>
-        <th class="text-right">ID</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th class="text-right">Price</th>
-        <th class="text-right">Due Date</th>
-        <th class="text-center">Actions</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td class="text-right">@item.Id</td>
-            <td>@item.Provider</td>
-            <td>@item.Type</td>
-            <td class="text-right">@item.Price</td>
-            <td class="text-right">@item.DueDate</td>
-            <td class="text-center">
-                <a asp-action="Edit" class="btn btn-sm btn-warning"
-                asp-route-Id="@item.Id">
-                    Edit
-                </a>
-                 @if (User.IsInRole("BillsManagement"))
-                 {
-                        <form 
-                            asp-action="Delete" 
-                            method="post" style="display: inline">
-                            <input type="hidden" name="billId" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </form>
-                 }
-            </td>
-        </tr>
-    }
+	<tr>
+		<th class="text-right">ID</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th class="text-right">Price</th>
+		<th class="text-right">Due Date</th>
+		@if (User.IsInRole("BillsManagement") || User.IsInRole("BillsWorker"))
+		{
+			<th class="text-center">Actions</th>
+		}
+	</tr>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td class="text-right">@item.Id</td>
+			<td>@item.Provider</td>
+			<td>@item.Type</td>
+			<td class="text-right">@item.Price</td>
+			<td class="text-right">@item.DueDate</td>
+			@if (User.IsInRole("BillsManagement") || User.IsInRole("BillsWorker"))
+			{
+				<td class="text-center">
+					<a asp-action="Edit" class="btn btn-sm btn-warning"
+			   asp-route-Id="@item.Id">
+						Edit
+					</a>
+					<form asp-action="Delete"
+				  method="post" style="display: inline">
+						<input type="hidden" name="billId" value="@item.Id" />
+						<button type="submit" class="btn btn-danger btn-sm">
+							Delete
+						</button>
+					</form>	
+				</td>
+			}
+		</tr>
+	}
 </table>

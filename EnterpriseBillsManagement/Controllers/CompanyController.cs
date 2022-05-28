@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseBillsManagement.Controllers
 {
-    public class CompanyController : Controller
+	[Authorize]
+	public class CompanyController : Controller
     {
         private ICompanyRepository repository;
 
@@ -26,6 +27,7 @@ namespace EnterpriseBillsManagement.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "BillsManagement")]
 		public async Task<IActionResult> Edit(Company company)
 		{
 			if (ModelState.IsValid)

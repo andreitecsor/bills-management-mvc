@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EnterpriseBillsManagement.Migrations
 {
-    public partial class onetomanyrel : Migration
+    public partial class roles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

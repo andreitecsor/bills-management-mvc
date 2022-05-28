@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnterpriseBillsManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220528160839_one-to-many-rel")]
-    partial class onetomanyrel
+    [Migration("20220528215026_roles")]
+    partial class roles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
