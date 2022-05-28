@@ -41,7 +41,6 @@ namespace EnterpriseBillsManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Bill bill)
         {
-            bill.DueDate = DateTime.Today;
             bill.CompanyId = selectedCompanyId;
             if (ModelState.IsValid)
             {
