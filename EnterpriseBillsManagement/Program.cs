@@ -14,7 +14,15 @@ namespace EnterpriseBillsManagement
                 builder.Configuration["ConnectionStrings:DefaultConnection"]);
             });
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // change the minimum length of the password;
+                options.Password.RequiredLength = 10;
+                //lock the user out for 30 minutes after 5 unsuccessful attempts;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            })
         .AddRoleManager<RoleManager<IdentityRole>>()
         .AddDefaultUI()
         .AddEntityFrameworkStores<ApplicationDbContext>();
