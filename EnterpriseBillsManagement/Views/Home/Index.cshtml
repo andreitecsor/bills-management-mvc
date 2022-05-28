@@ -1,9 +1,16 @@
-﻿@model BillsListViewModel
-@foreach (var p in Model?.Bills ?? Enumerable.Empty<Bill>())
+﻿<h1>Welcome to Enterprise Bill Management</h1>
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
 {
-    <partial name="BillSummary" model="p" />
+	 Context.Response.Redirect("/Admin");
 }
-<div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
-     page-class="btn" page-class-normal="btn-outline-dark"
-     page-class-selected="btn-primary" class="btn-group pull-right m-1">
-</div>
+else
+{
+	<a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+	<a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+}

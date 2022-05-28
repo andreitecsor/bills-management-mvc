@@ -50,7 +50,7 @@ namespace EnterpriseBillsManagement.Data
                     Type = BillType.Electricity,
                     Price = 530,
                     DueDate = new DateTime(2022, 06, 29),
-                    Client = smallCompany,
+                    Company = smallCompany,
                 },
                 new Bill
                 {
@@ -58,7 +58,7 @@ namespace EnterpriseBillsManagement.Data
                     Type = BillType.Water,
                     Price = 45.32m,
                     DueDate = new DateTime(2022, 06, 28),
-                    Client = smallCompany,
+                    Company = smallCompany,
                 },
                 new Bill
                 {
@@ -66,7 +66,7 @@ namespace EnterpriseBillsManagement.Data
                     Type = BillType.Electricity,
                     Price = 4555.32m,
                     DueDate = new DateTime(2022, 06, 27),
-                    Client = bigCompany,
+                    Company = bigCompany,
                 },
                 new Bill
                 {
@@ -74,7 +74,7 @@ namespace EnterpriseBillsManagement.Data
                     Type = BillType.Gas,
                     Price = 7035.22m,
                     DueDate = new DateTime(2022, 06, 01),
-                    Client = bigCompany,
+                    Company = bigCompany,
                 }
                 );
 

@@ -7,5 +7,7 @@
         public string? Email { get; set; }
         public string? Address { get; set; }
         public int noEmployeesOnSite { get; set; }
+
+        public ICollection<Bill> Bills { get; set; }
     }
 }

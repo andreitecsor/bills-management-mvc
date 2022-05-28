@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnterpriseBillsManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220525155115_Initial")]
-    partial class Initial
+    [Migration("20220528160839_one-to-many-rel")]
+    partial class onetomanyrel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace EnterpriseBillsManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<int?>("ClientId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
@@ -50,7 +50,7 @@ namespace EnterpriseBillsManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Bills");
                 });
@@ -280,11 +280,13 @@ namespace EnterpriseBillsManagement.Migrations
 
             modelBuilder.Entity("EnterpriseBillsManagement.Models.Bill", b =>
                 {
-                    b.HasOne("EnterpriseBillsManagement.Models.Company", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
+                    b.HasOne("EnterpriseBillsManagement.Models.Company", "Company")
+                        .WithMany("Bills")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,6 +338,11 @@ namespace EnterpriseBillsManagement.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EnterpriseBillsManagement.Models.Company", b =>
+                {
+                    b.Navigation("Bills");
                 });
 #pragma warning restore 612, 618
         }

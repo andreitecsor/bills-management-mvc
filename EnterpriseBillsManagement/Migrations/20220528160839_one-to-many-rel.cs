@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EnterpriseBillsManagement.Migrations
 {
-    public partial class Initial : Migration
+    public partial class onetomanyrel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -180,16 +180,17 @@ namespace EnterpriseBillsManagement.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(12,4)", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: true)
+                    CompanyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bills_Companies_ClientId",
-                        column: x => x.ClientId,
+                        name: "FK_Bills_Companies_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -232,9 +233,9 @@ namespace EnterpriseBillsManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bills_ClientId",
+                name: "IX_Bills_CompanyId",
                 table: "Bills",
-                column: "ClientId");
+                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

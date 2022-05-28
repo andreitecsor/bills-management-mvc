@@ -11,8 +11,7 @@ namespace EnterpriseBillsManagement.Data
             var serviceProvider = app.ApplicationServices
             .CreateScope().ServiceProvider;
 
-            using (var userManager = serviceProvider
-                .GetRequiredService<UserManager<IdentityUser>>())
+            using (var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>())
             {
                 IdentityUser user = await userManager.FindByEmailAsync(adminEmail);
 
@@ -28,7 +27,7 @@ namespace EnterpriseBillsManagement.Data
                 if (!await roleManager.RoleExistsAsync(roleName))
                     await roleManager.CreateAsync(new IdentityRole(roleName));
 
-                var adminWithRoleEmail = "andrei@tecsor.ism";
+                var adminWithRoleEmail = "admin@test.ism";
                 var adminWithRolePassword = "Secret123$";
 
                 IdentityUser adminWithRole = await userManager.FindByEmailAsync(adminWithRoleEmail);

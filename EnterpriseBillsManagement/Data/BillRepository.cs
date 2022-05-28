@@ -34,7 +34,7 @@ namespace EnterpriseBillsManagement.Data
                     dbEntry.Type = bill.Type;
                     dbEntry.Price = bill.Price;
                     dbEntry.DueDate = bill.DueDate;
-                    dbEntry.Client = bill.Client;
+                    dbEntry.Company = bill.Company;
                 }
             }
             await context.SaveChangesAsync();
