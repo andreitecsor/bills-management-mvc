@@ -51,6 +51,7 @@ namespace EnterpriseBillsManagement.Data
                     Price = 530,
                     DueDate = new DateTime(2022, 06, 29),
                     Company = smallCompany,
+                    CompanyId = smallCompany.Id,
                 },
                 new Bill
                 {
@@ -59,6 +60,7 @@ namespace EnterpriseBillsManagement.Data
                     Price = 45.32m,
                     DueDate = new DateTime(2022, 06, 28),
                     Company = smallCompany,
+                    CompanyId = smallCompany.Id,
                 },
                 new Bill
                 {
@@ -67,6 +69,7 @@ namespace EnterpriseBillsManagement.Data
                     Price = 4555.32m,
                     DueDate = new DateTime(2022, 06, 27),
                     Company = bigCompany,
+                    CompanyId = bigCompany.Id,
                 },
                 new Bill
                 {
@@ -75,6 +78,7 @@ namespace EnterpriseBillsManagement.Data
                     Price = 7035.22m,
                     DueDate = new DateTime(2022, 06, 01),
                     Company = bigCompany,
+                    CompanyId = bigCompany.Id,
                 }
                 );
 

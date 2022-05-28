@@ -24,7 +24,7 @@ namespace EnterpriseBillsManagement.Models
         [Column(TypeName = "decimal(12, 4)")]
         public decimal Price { get; set; }
         public DateTime DueDate { get; set; }
-        public Company Company { get; set; }
+        public Company? Company { get; set; }
 
         public int CompanyId { get; set; }
     }
