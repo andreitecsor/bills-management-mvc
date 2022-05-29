@@ -9,7 +9,8 @@ namespace EnterpriseBillsManagement
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<ApplicationDbContext>(opts => {
+            builder.Services.AddDbContext<ApplicationDbContext>(opts =>
+            {
                 opts.UseSqlServer(
                 builder.Configuration["ConnectionStrings:DefaultConnection"]);
             });
@@ -44,6 +45,12 @@ namespace EnterpriseBillsManagement
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
+            //-send HTTP Strict Transport Security Protocol(HSTS) headers to clients;
+            app.UseHsts(); //Not recommended for dev env because the HSTS settings are highly cacheable by browsers
+            
+            //redirect HTTP requests to HTTPS;
+            app.UseHttpsRedirection();
+
             SeedData.EnsurePopulated(app);
             Task.Run(async () =>
             {
@@ -51,9 +58,9 @@ namespace EnterpriseBillsManagement
             }).Wait();
 
             app.Run();
-            
 
-    
+
+
         }
     }
 }
