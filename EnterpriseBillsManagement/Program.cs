@@ -51,6 +51,11 @@ namespace EnterpriseBillsManagement
             //redirect HTTP requests to HTTPS;
             app.UseHttpsRedirection();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+            });
+
             SeedData.EnsurePopulated(app);
             Task.Run(async () =>
             {
@@ -58,9 +63,7 @@ namespace EnterpriseBillsManagement
             }).Wait();
 
             app.Run();
-
-
-
+           
         }
     }
 }
