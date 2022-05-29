@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EnterpriseBillsManagement.Controllers
 {
 	[Authorize]
+	[AutoValidateAntiforgeryToken]
 	public class CompanyController : Controller
     {
         private ICompanyRepository repository;
@@ -28,6 +29,8 @@ namespace EnterpriseBillsManagement.Controllers
 
 		[HttpPost]
 		[Authorize(Roles = "BillsManagement")]
+
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(Company company)
 		{
 			if (ModelState.IsValid)
@@ -55,6 +58,7 @@ namespace EnterpriseBillsManagement.Controllers
 
 		[HttpPost]
 		[Authorize(Roles = "BillsManagement")]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Delete(int companyId)
 		{
 			Company deletedComapany = await repository.DeleteCompanyAsync(companyId);

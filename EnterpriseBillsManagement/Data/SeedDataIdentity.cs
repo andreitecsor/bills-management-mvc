@@ -12,8 +12,6 @@ namespace EnterpriseBillsManagement.Data
             using (var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>())
             {
 
-      
-
                 var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 // Bills Management Role

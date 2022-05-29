@@ -40,7 +40,7 @@ namespace EnterpriseBillsManagement.Controllers
 
         [HttpPost]
         [Authorize(Roles = "BillsManagement,BillsWorker")]
-
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Bill bill)
         {
             bill.CompanyId = selectedCompanyId;
@@ -66,6 +66,7 @@ namespace EnterpriseBillsManagement.Controllers
 
         [HttpPost]
         [Authorize(Roles = "BillsManagement,BillsWorker")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int billId)
         {
             Bill deletedBill = await repository.DeleteBillAsync(billId);

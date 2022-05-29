@@ -1,5 +1,6 @@
 using EnterpriseBillsManagement.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnterpriseBillsManagement
@@ -50,11 +51,6 @@ namespace EnterpriseBillsManagement
             
             //redirect HTTP requests to HTTPS;
             app.UseHttpsRedirection();
-
-            builder.Services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.SameSite = SameSiteMode.None;
-            });
 
             SeedData.EnsurePopulated(app);
             Task.Run(async () =>
