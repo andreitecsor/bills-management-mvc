@@ -1,8 +1,7 @@
 # Web and Cloud - ASP.NET MVC
 
 ## BRIEF DESCRIPTION:
-	Enterprise Bills Management is an application that helps you keep
-track of bills for one or more companies. There are 3 roles:
+Enterprise Bills Management is an application that helps you keep track of bills for one or more companies. There are 3 roles:
 - AuditBills (can only see the companies and bills)
 	- email: audit@bills.ent
 	- password: 345Secret@
